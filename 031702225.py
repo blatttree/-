@@ -157,6 +157,29 @@ else:                                   #返回lu，删除路
         fang=str0
         flag[7]=1
 
+if num==3:
+    url = 'https://restapi.amap.com/v3/geocode/geo?address='+str1+'&output=XML&key=3a5ba72805444997697dd79f3fba36d5'
+    res = requests.get(url).text
+    res=str(res)
+    p=re.compile('<location>(.+?)</location>')
+    location=p.findall(res)[0]
+    url = 'https://restapi.amap.com/v3/geocode/regeo?output=xml&location='+location+'&key=3a5ba72805444997697dd79f3fba36d5&radius=50&extensions=base'
+    res = requests.get(url).text
+    p1=re.compile('<province>(.+?)</province>')
+    sheng=p1.findall(res)[0]
+    if sheng=='北京市'or sheng=='天津市'or sheng=='上海市'or sheng=='重庆市':
+        shi=sheng
+        sheng=delete_str('市',sheng)
+    else:
+        p2 = re.compile('<city>(.+?)</city>')
+        shi = p2.findall(res)[0]
+    p3 = re.compile('<district>(.+?)</district>')
+    xian = p3.findall(res)[0]
+    p3 = re.compile('<township>(.+?)</township>')
+    zhen = p3.findall(res)[0]
+    for i in range(1,5):
+        flag[i] = 1
+
 if num==1:
     list = ['0',sheng, shi, xian, zhen, lu]
     for i in range(1, 6):
