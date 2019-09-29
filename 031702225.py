@@ -5,14 +5,17 @@ import json
 import re
 
 def delete_str(del_str,f_str):
-    match = re.search(del_str,f_str)
+    match = re.search(del_str, f_str)
     if match:
-        f_str = f_str.replace(match.group(0),'')
+        f_str = f_str.replace(match.group(0), '')
     return f_str
 #输入为str0
 while 1:
-    str0 = input('')
-    if str0 == "END":
+    try:
+        str0 = input();
+        if(str0=="END"):
+            break
+    except EOFError:
         break
     flag = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     list0 = [sheng, shi, xian, zhen, lu, hao, fang] = [''] * 7
@@ -62,6 +65,7 @@ while 1:
     s22 = s2 + ','
     name = s2
     str0 = delete_str(s22, str0)
+    str0 = delete_str("\.", str0)
     str1 = str0
     #print(str1)
     # 地址划分,分级返回并删除对应字串
@@ -248,3 +252,6 @@ while 1:
     data = json.dumps(imformation, ensure_ascii=False)
     print(data)
     # 2!鲁胞,上海长宁区周18951233466家桥街道长宁路999号春天花园.
+
+
+
