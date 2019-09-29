@@ -63,6 +63,7 @@ while 1:
     name = s2
     str0 = delete_str(s22, str0)
     str1 = str0
+    #print(str1)
     # 地址划分,分级返回并删除对应字串
 
     # 返回省级，直辖市省市一起返回，删除省级单位
@@ -85,7 +86,8 @@ while 1:
         str0 = delete_str(list1[i] + '省', str0)
     else:
         str0 = delete_str(list1[i], str0)
-
+    if re.match("市",str0):
+        str0 = str0[1:-1]
     # 返回市，删除市
     list3 = list2.copy()
     len0 = len(list2)
